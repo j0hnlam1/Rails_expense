@@ -1,0 +1,17 @@
+<div>
+    <h2>Add a new bill</h2>
+	<p>
+        <input ng-model="newBill.bill.name" placeholder='Name' type="text">
+        <input ng-model="newBill.bill.price" placeholder='Price' type="float">
+	</p>
+    <p>
+        <input ng-model="newBill.bill.date" type="date">
+    </p>
+    <p>
+        <input ng-model="newBill.bill.category" placeholder='Category' type="text">
+        <input ng-model="newBill.bill.description" placeholder='Description' type="text">
+    </p>
+
+    <input ng-click="createBill()" type="submit" class='button-primary' value="Create Bill">
+
+</div>
