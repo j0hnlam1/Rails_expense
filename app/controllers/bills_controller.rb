@@ -15,11 +15,19 @@ class BillsController < ApplicationController
   end
 
   def edit
-  	@bill = Bill.find(params[:id])
+  	@bill = Bill.find_by_id(params[:id])
+    puts "****"
+    puts @bill.inspect
   end
 
   def update
   	@bill = Bill.find(params[:id])
+    if @bill.update(bill_params)
+          flash[:success] = "bill successfully updated"
+          redirect_to "/show"
+      else
+          flash[:errors] = @bill.errors.full_messages
+      end
   	
   end
 

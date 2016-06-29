@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
+  get 'users/new'
+
+  get 'users/show'
+
   root 'static_pages#index'
   resources :bills
-
   # get 'bills' => 'bills#index'
   # post 'bills' => 'bills#create'
   # delete 'bills/:id' => 'bills#destroy'
-  # patch 'bills/:id' => 'bills#edit'
+  # patch 'bills/:id/edit' => 'bills#edit'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

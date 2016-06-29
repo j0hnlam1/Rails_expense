@@ -19,7 +19,7 @@
     			<td> {{ bill.date }} </td>
     			<td> {{ bill.category }} </td>
     			<td> {{ bill.description }} </td>
-    			<td> <button ng-click='editBill()' class='button-warning'> Edit </button></td>
+    			<td> <button ng-click='editBill(bill.id)' class='button-warning'> Edit </button></td>
     			<td> <button ng-click='deleteBill(bill.id)' class='button-danger'> Delete </button></td>
     		</tr>
     	</tbody>

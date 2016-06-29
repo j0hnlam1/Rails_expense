@@ -5,11 +5,11 @@ app.config(function($routeProvider, $httpProvider) {
             templateUrl: "/partials/show.html.erb",
             controller: "billsController"
         })
-        .when("/add", {
-            templateUrl: "/partials/add.html.erb",
+        .when("/new", {
+            templateUrl: "/partials/new.html.erb",
             controller: "billsController"
         })
-        .when("/edit",{
+        .when("/:id/edit",{
             templateUrl: "/partials/edit.html.erb",
             controller: "billsController"
         })
@@ -32,11 +32,17 @@ app.factory("billFactory", function($http){
         })
     }
 
-    factory.update = function(callback){
-        $http.patch('/bills').then(function(output){
+    factory.edit = function(id,callback){
+        $http.get("/bills/"+id+"/edit").success(function(output){
             callback(output);
         })
     }
+
+    // factory.update = function(id,callback){
+    //     $http.patch("/bills/"+id+"/edit").then(function(output){
+    //         callback(output);
+    //     })
+    // }
 
     factory.delete = function(id, callback){
         $http.delete("/bills/"+id).success(function(output){
@@ -58,8 +64,8 @@ app.controller("billsController", function($scope, billFactory){
         });
     }
 
-    $scope.editBill = function(){
-        billFactory.update(function(json){
+    $scope.editBill = function(billId){
+        billFactory.edit(billId,function(json){
             $scope.bills = json;    
         })
     }

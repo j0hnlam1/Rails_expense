@@ -1,6 +1,59 @@
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<%= @misc%>
+
+	
 <div ng-app="expApp">
     <h1>d3js data</h1>
+    <div id="testing">
+	<script>
+
+	var data = [<%= @misc %>, <%= @h_e %>, <%= @e %>];
+	// var names = ["test", "lets go", "las vegas"];
+	var r = 100;
+
+	var color = d3.scale.ordinal()
+		.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"])
+
+	var canvas = d3.select("div#testing").append("svg")
+		.attr("width", 450)
+		.attr("height", 450);
+
+	var group = canvas.append("g")
+		.attr("transform", "translate(300, 300)");
+
+	var arc = d3.svg.arc()
+		.innerRadius(150)
+		.outerRadius(0);
+
+	var pie = d3.layout.pie()
+			.value(function (d){
+				return d;
+			});
+
+	var arcs = group.selectAll(".arc")
+			.data(pie(data))
+			.enter()
+			.append("g")
+			.attr("class", "arc");
+
+	arcs.append("path")
+		.attr("d", arc)
+		.attr("fill", function(d){
+			return color(d.data);
+		});
+	arcs.append("text")
+		.attr("transform", function(d){ 
+			return "translate(" + arc.centroid(d) + ")"})
+		.attr("text-anchor", "middle")
+		.attr("font-size", "1.5em")
+		.text(function (d){
+			return d.data;
+		});
+	</script>
+    </div>
     <hr>
-    <a href="#/show">Show</a> | <a href="#/add">Edit</a>
+    <%=@misc%>
+
+    <a href="#/show">Show</a> | <a href="#/new">Add</a>
     <div ng-view=""></div>
 </div>
