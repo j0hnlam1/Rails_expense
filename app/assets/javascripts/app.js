@@ -38,6 +38,12 @@ app.factory("billFactory", function($http){
         })
     }
 
+    factory.twilio = function(){
+        $http.get('/static_pages').then(function(output){
+            callback(output);
+        })
+    }
+
     // factory.update = function(id,callback){
     //     $http.patch("/bills/"+id+"/edit").then(function(output){
     //         callback(output);
@@ -73,6 +79,12 @@ app.controller("billsController", function($scope, billFactory){
     $scope.deleteBill = function(billId){
         billFactory.delete(billId, function(json){
             $scope.bills = json;
+        })
+    }
+
+    $scope.twilio = function(){
+        billFactory.twilio(function(data){
+            console.log(data)
         })
     }
 })

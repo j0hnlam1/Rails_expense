@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   get 'users/new'
-
   get 'users/show'
-
   root 'static_pages#index'
+  get '/static_pages' =>'static_pages#twilio'
   resources :bills
   # get 'bills' => 'bills#index'
   # post 'bills' => 'bills#create'
